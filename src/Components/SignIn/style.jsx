@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 
-export const ContainerLogin = styled.main`
+export const ContainerSign = styled.main`
     width: 100vw;
     height: 100vh;
 
@@ -16,11 +16,11 @@ export const Logo = styled.h1`
     width: 147px;
     height: 50px;
 
-    font-family: 'Playball' cursive;
+    font-family: 'Playball';
     font-style: normal;
     font-weight: 400;
-    font-size: 32px;
-    line-height: 50px;
+    font-size: 40px;
+    /* line-height: 50px; */
 
     color: #FFFFFF;
 `;
@@ -43,19 +43,30 @@ export const Input = styled.input`
     border-radius: 5px;
     border: none;
 
+    display:flex;
+    align-items: center;
+
     padding-left: 15px;
+
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+
+    color: #4c4452;
     
     &::placeholder{
-        width: 59px;
+        width: 200px;
         height: 23px;
 
         font-family: 'Raleway';
         font-style: normal;
         font-weight: 400;
         font-size: 20px;
-        line-height: 23px;
 
-        color: #000000;
+        color: #4c4452;
+        /* por props => disabled => #B2A8B8 : enabled => #4c4452*/
     }
 `;
 export const Button = styled.button`
@@ -75,7 +86,7 @@ export const Button = styled.button`
     color: #FFFFFF;
 `;
 export const Anchor = styled(Link)`
-    width: 191px;
+    width: 250px;
     height: 18px;
 
     font-family: 'Raleway';
@@ -83,6 +94,7 @@ export const Anchor = styled(Link)`
     font-weight: 700;
     font-size: 15px;
     line-height: 18px;
+    text-align: center;
 
     color: #FFFFFF;
 `;

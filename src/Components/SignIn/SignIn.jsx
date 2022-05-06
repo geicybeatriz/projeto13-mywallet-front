@@ -1,8 +1,8 @@
-import { ContainerLogin, Logo, Form, Input, Button, Anchor } from "./style.jsx";
+import { ContainerSign, Logo, Form, Input, Button, Anchor } from "./style.jsx";
 
-export default function Login(){
+export default function SignIn(){
     return (
-    <ContainerLogin>
+    <ContainerSign>
         <Logo>MyWallet</Logo>
         <Form>
             <Input type="email" placeholder="E-mail"/>
@@ -10,6 +10,6 @@ export default function Login(){
             <Button type="submit">Entrar</Button>
         </Form>
         <Anchor to="/sign-up">Primeira vez? Cadastre-se!</Anchor>
-    </ContainerLogin>
+    </ContainerSign>
     );
 }
