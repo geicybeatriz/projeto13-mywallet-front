@@ -54,19 +54,13 @@ export const Input = styled.input`
     font-size: 20px;
     line-height: 23px;
 
-    color: #4c4452;
+    color: ${props => props.disabled ? "#B2A8B8" : "#4c4452"};
     
     &::placeholder{
         width: 200px;
         height: 23px;
 
-        font-family: 'Raleway';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 20px;
-
-        color: #4c4452;
-        /* por props => disabled => #B2A8B8 : enabled => #4c4452*/
+        color: ${props => props.disabled ? "#B2A8B8" : "#4c4452"};
     }
 `;
 export const Button = styled.button`
@@ -84,6 +78,9 @@ export const Button = styled.button`
     line-height: 23px;
 
     color: #FFFFFF;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 `;
 export const Anchor = styled(Link)`
     width: 250px;
