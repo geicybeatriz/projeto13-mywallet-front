@@ -1,15 +1,27 @@
 import { useState } from "react";
 import { ContainerSign, Logo, Form, Input, Button, Anchor } from "../SignIn/style";
 import {ThreeDots} from "react-loader-spinner";
+import axios from "axios"; 
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp(){
-    const [newUser, setNewUser] = useState({name: '', email:'', password:'', conf_password: ''});
+    const [newUser, setNewUser] = useState({name: '', email:'', password:'', repeat_password: ''});
     const [disabled, setDisabled] = useState(false);
+    const navigate = useNavigate();
 
     function submitNewUser(e){
         e.preventDefault();
         setDisabled(true);
         console.log("new user", newUser);
+
+        const URL = "http://localhost:5000/sign-up";
+        const promise = axios.post(URL, newUser);
+        promise.then(() => navigate("/"));
+        promise.catch((erro) => {
+            console.log("erro", erro);
+            setDisabled(false);
+            alert("Algo deu ruim!");
+        })
     }
     
     return (
@@ -39,8 +51,8 @@ export default function SignUp(){
 
                 <Input  type="password"
                         placeholder="Confirme a senha" 
-                        value= {newUser.conf_password} 
-                        onChange={(e) => setNewUser({...newUser, conf_password: e.target.value})} 
+                        value= {newUser.repeat_password} 
+                        onChange={(e) => setNewUser({...newUser, repeat_password: e.target.value})} 
                         disabled={disabled}
                 />
 
@@ -49,5 +61,5 @@ export default function SignUp(){
             </Form>
             <Anchor to="/">Já tem uma conta? Entre agora!</Anchor>
         </ContainerSign>
-        );
-    }
+    );
+}
