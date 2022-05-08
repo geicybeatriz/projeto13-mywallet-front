@@ -12,7 +12,6 @@ export default function SignUp(){
     function submitNewUser(e){
         e.preventDefault();
         setDisabled(true);
-        console.log("new user", newUser);
 
         const URL = "http://localhost:5000/sign-up";
         const promise = axios.post(URL, newUser);
@@ -20,7 +19,6 @@ export default function SignUp(){
         promise.catch((erro) => {
             console.log("erro", erro);
             setDisabled(false);
-            alert("Algo deu ruim!");
         })
     }
     

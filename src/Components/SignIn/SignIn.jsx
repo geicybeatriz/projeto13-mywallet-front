@@ -1,15 +1,33 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
+import axios from "axios";
 import { ContainerSign, Logo, Form, Input, Button, Anchor } from "./style.jsx";
+import UserContext from "./../Context/context.jsx"
 
 export default function SignIn(){
+    const {setApiData} = useContext(UserContext);
     const [user, setUser] = useState({email: '', password: ''});
     const [disabled, setDisabled] = useState(false);
+    const navigate = useNavigate();
 
     function login (e){
         e.preventDefault();
         setDisabled(true);
-        console.log("user", user);
+        
+        const URL = "http://localhost:5000/";
+        const promise = axios.post(URL, user);
+        promise.then(response => {
+            console.log(response.data);
+            setApiData({...user, token: response.data});
+            navigate("/home");
+
+        })
+        promise.catch( (erro) => {
+            console.log( "erro" , erro);
+            alert("E-mail ou senha incorretos!");
+            setDisabled(false);
+        })
     }
 
     return (
