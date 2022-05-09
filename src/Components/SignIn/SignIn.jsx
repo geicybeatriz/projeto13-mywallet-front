@@ -19,7 +19,7 @@ export default function SignIn(){
         const promise = axios.post(URL, user);
         promise.then(response => {
             console.log(response.data);
-            setApiData({...user, token: response.data});
+            setApiData({...user, token: response.data, password:""});
             navigate("/home");
 
         })
