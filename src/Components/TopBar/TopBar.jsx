@@ -1,12 +1,30 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import UserContext from "../Context/context";
 import sair from "./../../assets/img/sair.svg"
+import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 export default function TopBar(props){
     const {userData} = props;
+    const navigate = useNavigate();
+
+    const {apiData} = useContext(UserContext);
+    function exit(){
+        const config = {headers: {Authorization: `Bearer ${apiData.token}`}};
+        const URL_logOut = "http://localhost:5000/home";
+        const request = axios.put(URL_logOut, {},config);
+        request.then(() => {
+            console.log("encerrou a sessão");
+            navigate("/");
+        });
+        request.catch((e) => console.log(e));
+        }
+    
     return (
         <Header >
             <Title>Olá, {userData.name}</Title>
-            <LogOut src={sair} alt="encerrar sessão"/>
+            <LogOut src={sair} alt="encerrar sessão" onClick={exit}/>
         </Header>
     )
 }
