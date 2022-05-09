@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import sair from "./../../assets/img/sair.svg"
 
-export default function TopBar(){
+export default function TopBar(props){
+    const {userData} = props;
     return (
         <Header >
-            <Title>Olá, fulano</Title>
+            <Title>Olá, {userData.name}</Title>
             <LogOut src={sair} alt="encerrar sessão"/>
         </Header>
     )

@@ -1,20 +1,20 @@
 import styled from "styled-components";
 import { AddCircleOutline, RemoveCircleOutline } from 'react-ionicons'
+import { Link } from "react-router-dom";
 
 
 export default function Buttons(){
-
     return(
         <ContainerButtons>
-            <Button>
+            <Button  to="/add-data">
                 <AddCircleOutline
                     color={'#ffffff'} 
                     height="22px"
                     width="22px"
                 />
                 <NameButton>Nova entrada</NameButton>
-            </Button>
-            <Button>
+            </Button >
+            <Button to="/subtract-data">
                 <RemoveCircleOutline
                     color={'#ffffff'} 
                     height="22px"
@@ -36,7 +36,7 @@ const ContainerButtons = styled.div`
     padding-top:10px;
 `;
 
-const Button = styled.button`
+const Button = styled(Link)`
     width: 155px;
     height: 114px;
 
@@ -63,7 +63,4 @@ const NameButton = styled.h2`
     text-align:left;
 
     color: #FFFFFF;
-
-
-
 `;

@@ -10,8 +10,7 @@ import axios from "axios";
 
 export default function Home(){
     const {apiData} = useContext(UserContext);
-    console.log(apiData);
-    const [userData, setUserData] = useState({});
+    const [userData, setUserData] = useState([]);
     const [registerList, setRegisterList] = useState([]);
     //const navigate = useNavigate();
 
@@ -21,8 +20,8 @@ export default function Home(){
         const request = axios.get(URL_RegisterList, config);
         request.then((response) => {
             console.log(response);
-            setUserData(response);
-            setRegisterList(response.data);
+            setUserData(response.data[1]);
+            setRegisterList(response.data[0]);
         });
         request.catch((e) => console.log(e));
     }, [apiData.token])
