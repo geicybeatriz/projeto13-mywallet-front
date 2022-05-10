@@ -15,7 +15,7 @@ export default function SignIn(){
         e.preventDefault();
         setDisabled(true);
         
-        const URL = "http://localhost:5000/";
+        const URL = "https://back-projeto13-mywallet.herokuapp.com/";
         const promise = axios.post(URL, user);
         promise.then(response => {
             console.log(response.data);

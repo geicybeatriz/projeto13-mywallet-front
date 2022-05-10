@@ -12,7 +12,7 @@ export default function TopBar(props){
     const {apiData} = useContext(UserContext);
     function exit(){
         const config = {headers: {Authorization: `Bearer ${apiData.token}`}};
-        const URL_logOut = "http://localhost:5000/home";
+        const URL_logOut = "https://back-projeto13-mywallet.herokuapp.com/home";
         const request = axios.put(URL_logOut, {},config);
         request.then(() => {
             console.log("encerrou a sessão");
