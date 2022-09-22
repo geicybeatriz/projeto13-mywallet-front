@@ -1,18 +1,14 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
-import UserContext from "../Context/context.jsx";
-import { useState } from "react";
-
 import SignIn from "../SignIn/SignIn.jsx";
 import SignUp from "./../SignUp/SignUp.jsx";
 import Home from "./../Home/Home.jsx";
 import AddCash from "../Entry/AddEntry.jsx";
 import SubtractCash from "../Exit/SubtractCash.jsx";
+import { UserProvider } from "../../contexts/userContext.js";
 
 export default function App(){
-    const [apiData, setApiData] = useState({});
-    
     return (
-        <UserContext.Provider value={{apiData, setApiData}} >
+        <UserProvider>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<SignIn/>}></Route>
@@ -22,6 +18,6 @@ export default function App(){
                     <Route path="/subtract-data" element={<SubtractCash />}></Route>
                 </Routes>
             </BrowserRouter>
-        </UserContext.Provider>
+        </UserProvider>
     );
 }

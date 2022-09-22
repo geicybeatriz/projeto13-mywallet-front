@@ -22,7 +22,7 @@ export default function Register(props){
         const URL_delete = `https://back-projeto13-mywallet.herokuapp.com/home/${id}`;
         const promise = axios.delete(URL_delete, config);
         promise.then(() => {
-            window.confirm("Realmente deseja deletar ese item?") === true && updateList()
+            window.confirm("Realmente deseja deletar esse item?") === true && updateList()
         });
         promise.catch(erro => console.log(erro));
     }
