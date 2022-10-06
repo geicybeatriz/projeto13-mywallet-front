@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { ContainerSign, Logo, Form, Input, Button, Anchor } from "../SignIn/style";
-import { ThreeDots } from "react-loader-spinner";
+import { ContainerSign, ImgLogo, Div, Logo, Form, Input, Button, Anchor } from "./style.jsx";
 import { useNavigate } from "react-router-dom";
 import authServices from "../../services/authService";
+import { ThreeDots } from "react-loader-spinner";
+import logoImg from "./../../assets/images/wallet.png";
 
 export default function SignUp(){
-    const [newUser, setNewUser] = useState({name: '', email:'', password:'', repeat_password: ''});
+    const [newUser, setNewUser] = useState({name:'', email:'', password:'', repeat_password: ''});
     const [disabled, setDisabled] = useState(false);
     const navigate = useNavigate();
 
@@ -15,15 +16,18 @@ export default function SignUp(){
 
         const promise = authServices.signUp(newUser);
         promise.then(() => navigate("/"));
-        promise.catch((erro) => {
-            console.log("erro", erro);
+        promise.catch((error) => {
+            console.log("error", error);
             setDisabled(false);
         })
     }
     
     return (
         <ContainerSign>
-            <Logo>MyWallet</Logo>
+            <Div>
+                <ImgLogo src={logoImg} alt="logo da carteira virtual"/>
+                <Logo>My Wallet</Logo>
+            </Div>
             <Form onSubmit={submitNewUser}>
                 <Input type="text" 
                         placeholder="Nome" 

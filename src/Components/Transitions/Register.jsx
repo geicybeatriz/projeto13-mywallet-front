@@ -1,12 +1,12 @@
 import { Container, ContainerCash, List, Total, Date, Description, Valor, Text, Result, Delete } from "./style";
-import UserContext from "../Context/context";
 import { useContext } from "react";
 import axios from "axios";
+import { UserContext } from "../../contexts/userContext";
 
 export default function Register(props){
     const {registerList,setRegisterList} = props;
-    const {apiData} = useContext(UserContext);
-    const config = {headers: {Authorization: `Bearer ${apiData.token}`}};
+    const token = useContext(UserContext);
+    const config = {headers: {Authorization: `Bearer ${token}`}};
     
     let total = 0;
     for(let i = 0; i < registerList.length; i++){

@@ -1,28 +1,38 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const ContainerSign = styled.main`
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh;
 
     display: flex;
     flex-direction:column;
     justify-content: center;
     align-items: center;
 
-    background-color:#915dbe;
+    background-color:#ffffff;
+`;
+export const ImgLogo = styled.img`
+    width: 50px;
+    height:50px;
+    
+`;
+export const Div = styled.div`
+    width:100%;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 `;
 export const Logo = styled.h1`
-    width: 147px;
-    height: 50px;
-
-    font-family: 'Playball';
+    font-family: 'Raleway';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     font-size: 40px;
-    /* line-height: 50px; */
-
-    color: #FFFFFF;
+    text-align:center;
+    
+    color: #6918b4;
 `;
 export const Form = styled.form`
     width: 100%;
@@ -34,25 +44,24 @@ export const Form = styled.form`
 
     gap:13px;
     margin: 24px 0;
+    padding: 0 25px;
 `;
 export const Input = styled.input`
-    width: 326px;
+    width: 100%;
     height: 58px;
 
-    background-color: #FFFFFF;
+    background-color: #e9f0fb;
     border-radius: 5px;
     border: none;
 
     display:flex;
     align-items: center;
-
     padding-left: 15px;
 
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 23px;
+    font-size: 16px;
 
     color: ${props => props.disabled ? "#B2A8B8" : "#4c4452"};
     
@@ -64,10 +73,10 @@ export const Input = styled.input`
     }
 `;
 export const Button = styled.button`
-    width: 326px;
+    width: 100%;
     height: 46px;
 
-    background-color: #A328D6;
+    background-color: #6918b4;
     border-radius: 5px;
     border: none;
 
@@ -93,5 +102,5 @@ export const Anchor = styled(Link)`
     line-height: 18px;
     text-align: center;
 
-    color: #FFFFFF;
+    color: #7ba6ea;
 `;

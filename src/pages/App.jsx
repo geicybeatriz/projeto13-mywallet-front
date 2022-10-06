@@ -1,10 +1,12 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
-import SignIn from "../SignIn/SignIn.jsx";
-import SignUp from "./../SignUp/SignUp.jsx";
-import Home from "./../Home/Home.jsx";
-import AddCash from "../Entry/AddEntry.jsx";
-import SubtractCash from "../Exit/SubtractCash.jsx";
-import { UserProvider } from "../../contexts/userContext.js";
+import { UserProvider } from "../contexts/userContext.js";
+import SignIn from "./auth/SignIn.jsx";
+import SignUp from "./auth/SignUp.jsx";
+
+//faltam
+import Home from "./Home.jsx";
+import AddCash from "../Components/Entry/AddEntry.jsx";
+import SubtractCash from "../Components/Exit/SubtractCash.jsx";
 
 export default function App(){
     return (

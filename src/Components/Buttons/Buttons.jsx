@@ -1,11 +1,11 @@
-import { AddCircleOutline, RemoveCircleOutline } from 'react-ionicons';
+import { IoAddCircleOutline, IoRemoveCircleOutline} from "react-icons/io5";
 import { ContainerButtons, Button, NameButton } from './styled';
 
 export default function Buttons(){
     return(
         <ContainerButtons>
             <Button  to="/add-data">
-                <AddCircleOutline
+                <IoAddCircleOutline
                     color={'#ffffff'} 
                     height="22px"
                     width="22px"
@@ -13,7 +13,7 @@ export default function Buttons(){
                 <NameButton>Nova entrada</NameButton>
             </Button >
             <Button to="/subtract-data">
-                <RemoveCircleOutline
+                <IoRemoveCircleOutline
                     color={'#ffffff'} 
                     height="22px"
                     width="22px"

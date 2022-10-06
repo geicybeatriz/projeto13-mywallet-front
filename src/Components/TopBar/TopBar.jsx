@@ -1,17 +1,16 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import UserContext from "../Context/context";
-import sair from "./../../assets/img/sair.svg"
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import { UserContext } from "../../contexts/userContext";
 
 export default function TopBar(props){
     const {userData} = props;
     const navigate = useNavigate();
 
-    const {apiData} = useContext(UserContext);
+    const token = useContext(UserContext);
     function exit(){
-        const config = {headers: {Authorization: `Bearer ${apiData.token}`}};
+        const config = {headers: {Authorization: `Bearer ${token}`}};
         const URL_logOut = "https://back-projeto13-mywallet.herokuapp.com/home";
         const request = axios.put(URL_logOut, {},config);
         request.then(() => {
@@ -24,7 +23,7 @@ export default function TopBar(props){
     return (
         <Header >
             <Title>Olá, {userData.name}</Title>
-            <LogOut src={sair} alt="encerrar sessão" onClick={exit}/>
+            <LogOut src="" alt="encerrar sessão" onClick={exit}/>
         </Header>
     )
 }

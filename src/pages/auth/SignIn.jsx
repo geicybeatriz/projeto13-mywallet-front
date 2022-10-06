@@ -1,9 +1,11 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
-import { ContainerSign, Logo, Form, Input, Button, Anchor } from "./style.jsx";
+import { ContainerSign,ImgLogo, Div, Logo, Form, Input, Button, Anchor } from "./style.jsx";
 import authServices from "../../services/authService.js";
-import UserContext from "../Context/context.jsx";
+import Swal from "sweetalert2";
+import { UserContext } from "../../contexts/userContext.js";
+import logoImg from "./../../assets/images/wallet.png";
 
 export default function SignIn(){
     const {setToken} = useContext(UserContext); 
@@ -23,14 +25,17 @@ export default function SignIn(){
         })
         promise.catch((erro) => {
             console.log( "erro" , erro);
-            alert("E-mail ou senha incorretos!");
+            Swal.fire('Erro', erro.data, 'error');
             setDisabled(false);
         })
     }
 
     return (
     <ContainerSign>
-        <Logo>MyWallet</Logo>
+        <Div>
+            <ImgLogo src={logoImg} alt="logo da carteira virtual"/>
+            <Logo>My Wallet</Logo>
+        </Div>
         <Form onSubmit={login}>
             <Input  type="email"
                     placeholder="E-mail"

@@ -1,16 +1,16 @@
 import {Container, NewEntry, Title, ContainerInputs, Input, Button} from "./style.jsx";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import UserContext from "../Context/context";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../contexts/userContext.js";
 
 export default function AddCash(){
-    const {apiData} = useContext(UserContext);
-    const config = {headers: {Authorization: `Bearer ${apiData.token}`}};
-
+    const token = useContext(UserContext);
+    const config = {headers: {Authorization: `Bearer ${token}`}};
     const [newEntrada, setNewEntrada] = useState({})
     const navigate = useNavigate();
-    useEffect(() => !apiData.token && navigate("/"), [apiData.token, navigate]);
+    
+    useEffect(() => !token && navigate("/"), [token, navigate]);
 
     function submitNewData(e){
         e.preventDefault();
