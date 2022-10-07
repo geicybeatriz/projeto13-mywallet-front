@@ -9,6 +9,7 @@ export default function Buttons(){
     const navigate = useNavigate();
 
     function addTransaction(type){
+        localStorage.setItem("type", type);
         setTypeTransaction(type);
         navigate("/addData");
     }

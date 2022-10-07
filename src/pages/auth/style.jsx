@@ -91,6 +91,7 @@ export const Button = styled.button`
     align-items: center;
     justify-content: center;
 `;
+
 export const Anchor = styled(Link)`
     width: 250px;
     height: 18px;
