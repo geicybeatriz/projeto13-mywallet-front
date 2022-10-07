@@ -1,28 +1,29 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TopBar from "../Components/TopBar/TopBar";
 import Buttons from "../Components/Buttons/Buttons";
 import Register from "../Components/Transitions/Register";
-import axios from "axios";
 import styled from "styled-components";
+import { UserContext } from "../contexts/userContext";
+import transactionServices from "../services/transactionServices";
 
 export default function Home(){
-    const [userData, setUserData] = useState([]);
     const [registerList, setRegisterList] = useState([]);
-    
+    const {token} = useContext(UserContext);
+    const config = {headers: {Authorization: `Bearer ${token}`}};
+
     useEffect(() =>{
-        const config = {headers: {Authorization: `Bearer `}};
-        const URL_RegisterList = "https://back-projeto13-mywallet.herokuapp.com/home";
-        const request = axios.get(URL_RegisterList, config);
-        request.then((response) => {
-            setUserData(response.data[1]);
-            setRegisterList(response.data[0]);
+        const promise = transactionServices.getTransactions(config);
+        promise.then((response) => {
+            console.log(response.data);
+            setRegisterList(response.data);
         });
-        request.catch((e) => console.log(e));
+        promise.catch((e) => console.log(e));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
         <Container>
-            <TopBar userData={userData}/>
+            <TopBar />
             <Transactions>
                 {registerList.length === 0 ? 
                     <Text>Não há registros de entrada ou saída</Text> 
@@ -50,7 +51,7 @@ const Transactions = styled.div`
     width: 100%;
     height: 446px;
 
-    background-color: #FFFFFF;
+    background-color: #e9f0fb;
     border-radius: 5px;
     border:none;
 `;

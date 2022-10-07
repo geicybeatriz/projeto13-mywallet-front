@@ -1,35 +1,45 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import { UserContext } from "../../contexts/userContext";
+import { BiLogOut } from "react-icons/bi";
+import transactionServices from "../../services/transactionServices";
+import Swal from "sweetalert2";
 
-export default function TopBar(props){
-    const {userData} = props;
+export default function TopBar(){
     const navigate = useNavigate();
+    const {token} = useContext(UserContext);
+    const config = {headers: {Authorization: `Bearer ${token}`}};
 
-    const token = useContext(UserContext);
     function exit(){
-        const config = {headers: {Authorization: `Bearer ${token}`}};
-        const URL_logOut = "https://back-projeto13-mywallet.herokuapp.com/home";
-        const request = axios.put(URL_logOut, {},config);
-        request.then(() => {
-            console.log("encerrou a sessão");
-            navigate("/");
-        });
-        request.catch((e) => console.log(e));
+        Swal.fire({
+            title: 'Tem certeza?',
+            showCancelButton: true,
+            confirmButtonText: 'Sim!',
+            cancelButtonText:'Não!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                logOut();
+            } 
+        })
+        
+        function logOut(){
+            const request = transactionServices.logOut(config);
+            request.then(() => navigate("/"));
+            request.catch((e) => console.log(e));
+            }
         }
     
     return (
         <Header >
-            <Title>Olá, {userData.name}</Title>
-            <LogOut src="" alt="encerrar sessão" onClick={exit}/>
+            <Title>Minha conta</Title>
+            <BiLogOut size="25px" color="#6918b4" alt="encerrar sessão" onClick={exit}/>
         </Header>
     )
 }
 
 const Header = styled.div`
-    width: 326px;
+    width: 100%;
     height: 70px;
 
     display:flex;
@@ -38,7 +48,7 @@ const Header = styled.div`
 `;
 
 const Title = styled.h1`
-    width: 250px;
+    width: 100%;
     height: 31px;
 
     font-family: 'Raleway';
@@ -47,11 +57,5 @@ const Title = styled.h1`
     font-size: 26px;
     line-height: 31px;
 
-    color: #FFFFFF;
-`;
-
-const LogOut = styled.img`
-    width: 23px;
-    height: 24px;
-    color: #ffffff;
+    color: #6918b4;
 `;

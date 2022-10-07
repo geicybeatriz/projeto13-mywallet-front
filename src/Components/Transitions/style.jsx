@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Container = styled.div`
     width: 326px;
     height: 446px;
-    background-color: #ffffff;
+    background-color: #e9f0fb;
 
     display:flex;
     flex-direction: column;
@@ -15,7 +15,7 @@ export const Container = styled.div`
 `;
 
 export const List = styled.div`
-    width: 326px;
+    width: 100%;
 
     display:flex;
     flex-direction:column;
@@ -49,7 +49,7 @@ export const Date = styled.p`
     font-size: 16px;
     line-height: 19px;
 
-    color: #C6C6C6;
+    color: #186068;
 `;
 
 export const Description = styled.div`
@@ -75,7 +75,7 @@ export const Valor = styled.div`
     line-height: 19px;
     text-align: right;
 
-    color: ${props => props.type ? "#03AC00": "#C70000"};
+    color: ${props => props.type === "entrada" ? "#03AC00": "#C70000"};
 `;
 
 export const Delete = styled.p`
@@ -87,7 +87,7 @@ export const Delete = styled.p`
     line-height: 19px;
     text-align: center;
 
-    color: #C6C6C6;
+    color: #186068;
 `;
 
 export const Total = styled.div`
