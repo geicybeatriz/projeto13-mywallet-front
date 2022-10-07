@@ -1,11 +1,12 @@
-import { Container, ContainerCash, List, Total, Date, Description, Valor, Text, Result, Delete } from "./style";
 import { useContext } from "react";
-import axios from "axios";
 import { UserContext } from "../../contexts/userContext";
+import transactionServices from "../../services/transactionServices";
+import { TiDelete } from "react-icons/ti";
+import Swal from "sweetalert2";
+import styled from "styled-components";
 
-export default function Register(props){
-    const {registerList,setRegisterList} = props;
-    const token = useContext(UserContext);
+export default function Register({registerList, getTransactions}){
+    const {token} = useContext(UserContext);
     const config = {headers: {Authorization: `Bearer ${token}`}};
     
     let total = 0;
@@ -18,40 +19,139 @@ export default function Register(props){
     }
 
     function deleteItem(id){
-        console.log(id);
-        const URL_delete = `https://back-projeto13-mywallet.herokuapp.com/home/${id}`;
-        const promise = axios.delete(URL_delete, config);
-        promise.then(() => {
-            window.confirm("Realmente deseja deletar esse item?") === true && updateList()
+        Swal.fire({
+            title: 'Tem certeza?',
+            showCancelButton: true,
+            confirmButtonText: 'Sim!',
+            cancelButtonText:'Não!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const promise = transactionServices.deleteTransaction(id, config);
+                promise.then(() => {
+                    getTransactions();
+                });
+                promise.catch(erro => console.log(erro));
+            } 
         });
-        promise.catch(erro => console.log(erro));
-    }
-
-    function updateList(){
-        const URL_RegisterList = "https://back-projeto13-mywallet.herokuapp.com/home";
-        const request = axios.get(URL_RegisterList, config);
-        request.then((response) => {
-            setRegisterList(response.data[0]);
-        });
-        request.catch((e) => console.log(e));
     }
     
     return(
         <Container>
             <List>
-                {registerList.map((obj, id) => 
-                    <ContainerCash id={obj._id} key={id}>
-                        <Date>{obj.date}</Date>
-                        <Description>{obj.description}</Description>
-                        <Valor type={obj.type}>{obj.amount}</Valor>
-                        <Delete onClick={() => deleteItem(obj._id)}>x</Delete>
+                {registerList.map((item, id) => 
+                    <ContainerCash id={item._id} key={id}>
+                        <Div>
+                            <Date>{item.createdAt}</Date>
+                            <Description>{item.description}</Description>
+                            <Valor type={item.type}>{item.amount},00</Valor>
+                        </Div>
+                        <TiDelete size="25px" color="#6918b4" onClick={() => deleteItem(item._id)}/>
                     </ContainerCash>
                 )}
             </List>
             <Total>
                 <Text>Saldo</Text>
-                <Result >{Math.round(total).toFixed(2)}</Result>
+                <Result type={(total===0) ? "neutro": (total>0) ? "lucro" : "prejuízo"}>
+                    {Math.round(total).toFixed(2)}
+                </Result>
             </Total>
         </Container>
     );
 }
+
+const Container = styled.div`
+    width: 100%;
+    height: 446px;
+
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+`;
+
+const List = styled.div`
+    width: 100%;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:5px;
+    padding:0 15px;
+`;
+
+const ContainerCash = styled.div`
+    width: 100%;
+    height: 20px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap: 5px;
+`;
+
+const Div= styled.div`
+    width:90%;
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    gap: 5px;
+`;
+
+const Date = styled.p`
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    text-align:left;
+    color: #333333;
+`;
+
+const Description = styled.div`
+    width: 70%;
+
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    text-align:left;
+    color: #333333;
+`;
+
+const Valor = styled.div`
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+
+    color: ${props => props.type === "entrada" ? "#03AC00": "#C70000"};
+`;
+
+const Total = styled.div`
+    width: 100%;
+    height: 20px;
+
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 16px;
+`;
+
+const Text = styled.div`
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    color: #333333;
+`;
+
+const Result = styled.div`
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    text-align: right;
+    color: ${props => props.type==="prejuízo" ? "#C70000" : (props.type === "lucro") ? "#03AC00" : "#333333"};
+`;

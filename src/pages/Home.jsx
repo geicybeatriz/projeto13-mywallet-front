@@ -11,15 +11,21 @@ export default function Home(){
     const {token} = useContext(UserContext);
     const config = {headers: {Authorization: `Bearer ${token}`}};
 
-    useEffect(() =>{
+    function getTransactions(){
         const promise = transactionServices.getTransactions(config);
         promise.then((response) => {
             console.log(response.data);
             setRegisterList(response.data);
         });
         promise.catch((e) => console.log(e));
+    }
+
+    useEffect(() =>{
+        getTransactions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+
 
     return (
         <Container>
@@ -28,7 +34,7 @@ export default function Home(){
                 {registerList.length === 0 ? 
                     <Text>Não há registros de entrada ou saída</Text> 
                     : 
-                    <Register registerList={registerList} setRegisterList={setRegisterList}/>}
+                    <Register registerList={registerList} getTransactions={getTransactions}/>}
             </Transactions>
             <Buttons setRegisterList={setRegisterList}/>
         </Container>
@@ -67,7 +73,7 @@ const Text = styled.div`
     line-height: 23px;
     text-align: center;
 
-    color: #868686;
+    color: #1c737d;
 
     display:flex;
     justify-content:center;
