@@ -79,7 +79,7 @@ const List = styled.div`
     align-items:center;
 
     gap:5px;
-    padding:0 15px;
+    padding:0 10px;
 `;
 
 const ContainerCash = styled.div`
