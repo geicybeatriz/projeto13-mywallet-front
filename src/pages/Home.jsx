@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import TopBar from "../Components/TopBar/TopBar";
-import Buttons from "../Components/Buttons/Buttons";
+import TopBar from "./../components/TopBar/TopBar.jsx";
+import Buttons from "./../components/Buttons/Buttons.jsx";
 import styled from "styled-components";
 import { UserContext } from "../contexts/userContext";
 import transactionServices from "../services/transactionServices";
