@@ -18,4 +18,7 @@ My Wallet é uma aplicação web, que simula uma carteira digital, auxiliando pe
 
 Nesta aplicação, o usuário pode se registrar e, após o login, salvar informações financeiras como entradas e saídas. Essas informações também podem ser alteradas e/ou deletadas em caso de erro.
 
-## Imagens
+
+<!-- 
+1. fazer aqueles mock-ups com imagens do app pra ilustrar bonitinho
+-->
