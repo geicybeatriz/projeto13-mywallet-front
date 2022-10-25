@@ -42,13 +42,19 @@ export default function SignIn(){
                     value={user.email}
                     onChange={(e) => setUser({...user, email: e.target.value})}
                     disabled={disabled}
+                    pattern="^([\w\-]+\.)*[\w\- ]+@([\w\- ]+\.)+([\w\-]{2,3})$" 
+                    title="Digite um email válido!"
+                    required
             />
 
             <Input  type="password"
                     placeholder="Senha"
                     value={user.password}
                     onChange={(e) => setUser({...user, password: e.target.value})}
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" 
                     disabled={disabled}
+                    title="Mínimo de 8 caracteres e pelo menos 1 letra maiúscula, 1 letra minúscula e 1 número"
+                    required
             />
 
             <Button type="submit" disabled={disabled}>

@@ -34,6 +34,7 @@ export default function SignUp(){
                         value= {newUser.name} 
                         onChange={(e) => setNewUser({...newUser, name: e.target.value})} 
                         disabled={disabled} 
+                        required
                 />
 
                 <Input type="email" 
@@ -41,6 +42,9 @@ export default function SignUp(){
                         value= {newUser.email} 
                         onChange={(e) => setNewUser({...newUser, email: e.target.value})} 
                         disabled={disabled}
+                        pattern="^([\w\-]+\.)*[\w\- ]+@([\w\- ]+\.)+([\w\-]{2,3})$" 
+                        title="Digite um email válido!"
+                        required
                 />
 
                 <Input  type="password"
@@ -48,13 +52,19 @@ export default function SignUp(){
                         value= {newUser.password} 
                         onChange={(e) => setNewUser({...newUser, password: e.target.value})} 
                         disabled={disabled}
+                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" 
+                        title="Mínimo de 8 caracteres e pelo menos 1 letra maiúscula, 1 letra minúscula e 1 número"
+                        required
                 />
 
                 <Input  type="password"
                         placeholder="Confirme a senha" 
                         value= {newUser.repeat_password} 
                         onChange={(e) => setNewUser({...newUser, repeat_password: e.target.value})} 
+                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" 
                         disabled={disabled}
+                        title="Deve ser igual à senha digitada no campo acima!"
+                        required
                 />
 
                 <Button type="submit" disabled={disabled}>{!disabled ? "Cadastrar" 
