@@ -14,7 +14,6 @@ export default function Home(){
     function getTransactions(){
         const promise = transactionServices.getTransactions(config);
         promise.then((response) => {
-            console.log(response.data);
             setRegisterList(response.data);
         });
         promise.catch((e) => console.log(e));

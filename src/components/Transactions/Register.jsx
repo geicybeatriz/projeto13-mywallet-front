@@ -43,16 +43,16 @@ export default function Register({registerList, getTransactions}){
                         <Div>
                             <Date>{item.createdAt}</Date>
                             <Description>{item.description}</Description>
-                            <Valor type={item.type}>{item.amount},00</Valor>
+                            <Valor type={item.type}>{((item.amount).toFixed(2)).replace('.',',')}</Valor>
                         </Div>
-                        <TiDelete size="25px" color="#6918b4" onClick={() => deleteItem(item._id)}/>
+                        <TiDelete size="20px" color="#6918b4" onClick={() => deleteItem(item._id)}/>
                     </ContainerCash>
                 )}
             </List>
             <Total>
                 <Text>Saldo</Text>
                 <Result type={(total===0) ? "neutro": (total>0) ? "lucro" : "prejuízo"}>
-                    {Math.round(total).toFixed(2)}
+                    {(Math.round(total).toFixed(2)).replace('.',',')}
                 </Result>
             </Total>
         </Container>

@@ -17,7 +17,6 @@ export default function NewData(){
 
   function submitNewData(e){
     e.preventDefault();
-    console.log(data);
 
     const promise = transactionServices.addTransaction(data, config);
     promise.then(() => navigate("/home"));
